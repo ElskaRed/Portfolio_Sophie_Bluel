@@ -1,3 +1,5 @@
+// Fonction permettant la récupération dynamique des travaux depuis l'API
+
 fetch("http://localhost:5678/api/works",{
   headers: {"accept": "application/json", "Content-Type": "application/json"}
 })
@@ -25,3 +27,19 @@ fetch("http://localhost:5678/api/works",{
   .catch(error => {
     console.log("Une erreur s\'est produite:", error);
   });
+
+// Filtres
+    //Visuel, changement de classe CSS
+const filtresBoutons = document.querySelectorAll('.filtres__boutons');
+
+const selectionBouton = (event) => {
+  filtresBoutons.forEach(bouton => {
+    bouton.classList.remove("filtres__boutons--select");
+  });
+  event.target.classList.add("filtres__boutons--select");
+};
+
+filtresBoutons.forEach(bouton => {
+  bouton.addEventListener("click", selectionBouton);
+});
+
