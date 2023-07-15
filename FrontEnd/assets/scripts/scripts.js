@@ -1,5 +1,3 @@
-// Fonction pour afficher les travaux
-
 const AfficherTravaux = (data) => {
   data.forEach((item) => {
     const imageUrl = item.imageUrl;
@@ -20,45 +18,52 @@ const AfficherTravaux = (data) => {
   });
 };
 
-// fonction pour récupérer les travaux depuis l'API
-
 const getWorks = () => {
-  return fetch("http://localhost:5678/api/works",{
-    headers: {"accept": "application/json", "Content-Type": "application/json"}
+  return fetch("http://localhost:5678/api/works", {
+    headers: { "accept": "application/json", "Content-Type": "application/json" }
   })
     .then(response => response.json())
     .catch(error => {
-      console.log("Une erreur s\'est produite:", error);
+      console.log("Une erreur s'est produite:", error);
     });
 };
 
-// Appel de la fonction de récupération + affichage des travaux
-
-getWorks()
-  .then(data => {
-    console.log(data);
-    AfficherTravaux(data);
-  });
-
-// Filtres
-
-fetch ("http://localhost:5678/api/category",{
-  headers: {"accept": "application/json", "Content-Type": "application/json"}
-})
-
-const filtresBoutons = document.querySelectorAll('.filtres__boutons');
-const gallery = document.querySelector("gallery");
-
-filtresBoutons.forEach(bouton => {
-  bouton.addEventListener("click", selectionBouton);
-});
-
-const selectionBouton = (event) => {
-  filtresBoutons.forEach(bouton => {
-    bouton.classList.remove("filtres__boutons--select");
-  });
-  event.target.classList.add("filtres__boutons--select");
+const getCategory = () => {
+  return fetch("http://localhost:5678/api/category", {
+    headers: { "accept": "application/json", "Content-Type": "application/json" }
+  })
+    .then(response => response.json())
+    .catch(error => {
+      console.log("Une erreur s'est produite:", error);
+    });
 };
 
+const filtresBoutons = document.querySelectorAll('.filtres__boutons');
+const gallery = document.querySelector('.gallery');
 
+Promise.all([getWorks(), getCategory()]).then(([worksData, categoryData]) => {
+  const data = worksData;
+  const categories = categoryData;
 
+  AfficherTravaux(data);
+  filtresBoutons.forEach((bouton, index) => {
+    bouton.addEventListener('click', () => {
+      const selectedCategoryId = index;
+
+      while (gallery.firstChild) {
+        gallery.firstChild.remove();
+      }
+      if (selectedCategoryId === 0) {
+        AfficherTravaux(data);
+      } else {
+        const filteredWorks = data.filter(item => item.categoryId === selectedCategoryId);
+        AfficherTravaux(filteredWorks);
+      }
+
+      filtresBoutons.forEach((bouton) => {
+        bouton.classList.remove('filtres__boutons--select');
+      });
+      bouton.classList.add('filtres__boutons--select');
+    });
+  });
+});
