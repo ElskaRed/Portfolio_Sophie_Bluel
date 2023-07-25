@@ -23,7 +23,7 @@ async function loginUser() {
             password: password
         };
         
-        //try {
+        try {
             const response = await fetch("http://localhost:5678/api/users/login", {
                 method: "POST",
                 headers: {
@@ -34,17 +34,18 @@ async function loginUser() {
             });
             
             const data = await response.json();
-            console.log(data);
-            
+            let token = data.token;
+            console.log(data, token);
+        
             if (data.userId === 1) {
-                window.location.href = "index.html?isAdmin=true";
+                window.location.href = "../index.html";
             } else {
                 alert("Utilisateur inconnu")
-            };
+            }
 
-      /* } catch (error) {
+        } catch (error) {
             console.error("Une erreur s'est produite :", error);
-        } */
+        }
     });
 }
 
