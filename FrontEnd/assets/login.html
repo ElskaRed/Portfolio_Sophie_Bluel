@@ -9,7 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="style.css">
-	<script type="module" src="scripts/scripts.js" defer></script>
+	<script src="scripts/scripts.js" defer></script>
+	<script src="scripts/scriptslogin.js" defer></script>
 </head>
 <body class="login__body">
 <header>
@@ -26,11 +27,11 @@
 <main>
 	<section id="login">
 		<h2>Log In</h2>
-		<form action="#" method="post">
+		<form id="login__form" action="#" method="post">
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="E-mail" id="email">
 			<label for="pwd">Mot de passe</label>
-			<input type="password" id="pwd" name="pwd"> 
+			<input type="password" id="password" name="password"> 
 			<input type="submit" value="Se connecter">
 		</form>
 	</section>

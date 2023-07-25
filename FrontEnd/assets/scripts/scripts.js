@@ -1,9 +1,11 @@
-const AfficherTravaux = (data) => {
+function afficherTravaux(data) {
+  const gallery = document.querySelector(".gallery");
+  gallery.innerHTML = '';
+  
   data.forEach((item) => {
     const imageUrl = item.imageUrl;
     const description = item.title;
 
-    const gallery = document.querySelector(".gallery");
     const figureElement = document.createElement("figure");
     gallery.appendChild(figureElement);
 
@@ -16,9 +18,9 @@ const AfficherTravaux = (data) => {
     figcaptionElement.textContent = item.title;
     figureElement.appendChild(figcaptionElement);
   });
-};
+}
 
-const getWorks = () => {
+function getWorks() {
   return fetch("http://localhost:5678/api/works", {
     headers: { "accept": "application/json", "Content-Type": "application/json" }
   })
@@ -26,44 +28,50 @@ const getWorks = () => {
     .catch(error => {
       console.log("Une erreur s'est produite:", error);
     });
-};
+}
 
-const getCategory = () => {
-  return fetch("http://localhost:5678/api/category", {
+function getCategory() {
+  return fetch("http://localhost:5678/api/categories", {
     headers: { "accept": "application/json", "Content-Type": "application/json" }
   })
     .then(response => response.json())
     .catch(error => {
       console.log("Une erreur s'est produite:", error);
     });
-};
+}
 
-const filtresBoutons = document.querySelectorAll('.filtres__boutons');
-const gallery = document.querySelector('.gallery');
+document.addEventListener("DOMContentLoaded", () => {
+  const filtresBoutons = document.querySelectorAll('.filtres__boutons');
+  const gallery = document.querySelector('.gallery');
+  let worksData = [];
+  let categoriesData = [];
 
-Promise.all([getWorks(), getCategory()]).then(([worksData, categoryData]) => {
-  const data = worksData;
-  const categories = categoryData;
+  function monFiltre(clickedButton) {
+    const buttonIndex = Array.from(filtresBoutons).indexOf(clickedButton);
+    const category = categoriesData[buttonIndex - 1];
+    const filteredData = category ? worksData.filter(item => item.category.id === category.id) : worksData;
+    afficherTravaux(filteredData);
 
-  AfficherTravaux(data);
-  filtresBoutons.forEach((bouton, index) => {
-    bouton.addEventListener('click', () => {
-      const selectedCategoryId = index;
+    filtresBoutons.forEach((bouton) => {
+      bouton.classList.remove('filtres__boutons--select');
+    });
+    clickedButton.classList.add('filtres__boutons--select');
+  }
 
-      while (gallery.firstChild) {
-        gallery.firstChild.remove();
-      }
-      if (selectedCategoryId === 0) {
-        AfficherTravaux(data);
-      } else {
-        const filteredWorks = data.filter(item => item.categoryId === selectedCategoryId);
-        AfficherTravaux(filteredWorks);
-      }
+  getWorks()
+    .then((travaux) => {
+      worksData = travaux;
+      afficherTravaux(travaux);
+    });
+
+  getCategory()
+    .then((categories) => {
+      categoriesData = categories;
 
       filtresBoutons.forEach((bouton) => {
-        bouton.classList.remove('filtres__boutons--select');
+        bouton.addEventListener("click", () => {
+          monFiltre(bouton);
+        });
       });
-      bouton.classList.add('filtres__boutons--select');
     });
-  });
 });
