@@ -55,11 +55,15 @@ loginUser();
 let token = localStorage.getItem("Token");
 const modeEdition = document.querySelector(".mode-edition");
 const boutonModifier = document.querySelectorAll(".bouton-modifier");
+const filtreees = document.querySelector(".filtres");
+const login = document.querySelector(".login__lien");
+
 if (token) {
   modeEdition.style.display = "flex";
   boutonModifier.forEach(button => button.style.display = "flex");
+  filtreees.style.display = "none";
 
-  login.innerHTML = "logout"
+  login.innerText = "logout";
   login.addEventListener("click", () => {
       localStorage.removeItem("Token")
       window.location.href = "login.html"
