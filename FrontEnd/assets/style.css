@@ -365,3 +365,80 @@ footer nav ul {
 	right: -100px;
 	top: 10px;;
 }
+
+/******* Modal *******/
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-wrapper {
+	width: 50%;
+	max-width: 630px;
+	min-width: 500px;
+	max-height: 730px;
+	background-color: white;
+	text-align: center;
+	padding: 20px;
+	border-radius: 10px;
+	overflow: auto;
+}
+
+.titre-modal {
+	font-family: 'Work Sans' ;
+	font-weight: 500;
+	font-size: 1.6em;
+	color: black;
+	margin-bottom: 30px;
+}
+
+.icones-modal {
+	display: flex;
+	justify-content: space-between;
+}
+
+.retour, .fermer {
+	border: none;
+	background: transparent;
+}
+
+.contenu-modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+}
+
+.contenu-flexible-modal {
+	width: calc(100% - 180px);
+}
+
+.barre-modal {
+	width: calc(100% - 180px);
+	background-color: #B3B3B3;
+	height: 2px;
+}
+
+.bouton-modal {
+	width: 220px;
+	font-size: 1em;
+}
+
+.supprimer-modal {
+	border: none;
+	background-color: transparent;
+	font-family: 'Work Sans' ;
+	font-weight: 500;
+	font-size: 1.1em;
+	color: rgb(199, 38, 38);
+	margin-bottom: 30px;
+}
