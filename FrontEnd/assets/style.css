@@ -195,7 +195,7 @@ nav a:hover {
 }
 #contact, #login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > *, #login > * {
 	text-align: center;
@@ -204,20 +204,20 @@ margin: auto;
 #contact h2, #login h2 {
 	margin-bottom: 20px;
 }
-#contact form, #login form {
+#contact form, #login form, .contenu-modal form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #login input {
+#contact input, #login input, .contenu-modal input, select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #login label {
+#contact label, #login label, .contenu-modal label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -225,7 +225,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+.submit {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -368,6 +368,7 @@ footer nav ul {
 
 /******* Modal *******/
 
+/******* Modal galerie *****/
 .modal {
 	position: fixed;
 	top: 0;
@@ -415,7 +416,6 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 30px;
 }
 
 .contenu-flexible-modal {
@@ -429,7 +429,7 @@ footer nav ul {
 }
 
 .bouton-modal {
-	width: 220px;
+	width: 235px;
 	font-size: 1em;
 }
 
@@ -469,4 +469,64 @@ footer nav ul {
 	padding: 0;
 	cursor: pointer;
 	font-family: 'Work Sans';
+}
+
+/******* Modal ajout photo ******/
+
+.ajouter-photo-modal1 {
+	display: flex;
+	flex-direction: column;
+}
+
+.cadre-ajout-photo {
+	width: 100%;
+	background-color: #E8F1F6;
+	height: 170px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+}
+
+.valider1 {
+	padding: 7px;
+	width: 235px;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin : 2em auto ;
+	border-radius: 60px;
+	font-size: 0.9em;
+}
+
+.contenu-modal form {
+	margin-top: 0;
+	margin-bottom: 40px;
+	width: calc(100% - 180px);
+}
+
+select {
+	background-color: white;
+}
+
+.picture {
+	height: 60px;
+}
+
+.bouton-ajout-photo {
+	border: none;
+	border-radius: 25px;
+	width: 170px;
+	color: #306685;
+	background-color: #CBD6DC;
+	font-family: 'Work Sans';
+	padding: 10px;
+	margin-top: 15px;
+	margin-bottom: 6px;
+	cursor: pointer;
+}
+
+.cadre-ajout-photo p {
+	font-size: 0.8em;
 }
