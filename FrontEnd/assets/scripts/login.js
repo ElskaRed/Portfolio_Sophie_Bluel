@@ -51,3 +51,17 @@ async function loginUser() {
 }
 
 loginUser();
+
+let token = localStorage.getItem("Token");
+const modeEdition = document.querySelector(".mode-edition");
+const boutonModifier = document.querySelectorAll(".bouton-modifier");
+if (token) {
+  modeEdition.style.display = "flex";
+  boutonModifier.forEach(button => button.style.display = "flex");
+
+  login.innerHTML = "logout"
+  login.addEventListener("click", () => {
+      localStorage.removeItem("Token")
+      window.location.href = "login.html"
+  })
+}

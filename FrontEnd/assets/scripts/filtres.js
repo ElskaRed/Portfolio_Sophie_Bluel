@@ -80,16 +80,3 @@ function monFiltre(event) {
   afficherTravaux(filteredData);
 }
 
-let token = localStorage.getItem("Token");
-const modeEdition = document.querySelector(".mode-edition");
-const boutonModifier = document.querySelectorAll(".bouton-modifier");
-if (token) {
-  modeEdition.style.display = "block";
-  boutonModifier.forEach(button => button.style.display = "block");
-
-  login.innerHTML = "logout"
-  login.addEventListener("click", () => {
-      localStorage.removeItem("Token")
-      window.location.href = "login.html"
-  })
-}

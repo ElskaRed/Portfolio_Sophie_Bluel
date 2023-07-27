@@ -113,9 +113,10 @@ nav a {
 	height: 20px;
 }
 
-li:hover {
+nav a:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -339,4 +340,26 @@ footer nav ul {
 	font-size: 0.9em;
 	border: none;
 	background-color: transparent;
+}
+
+.bm1 {
+	position: absolute;
+	bottom: -40px;
+	left: 45px;
+}
+
+.photo {
+	position: relative;
+}
+
+.title {
+	position: relative;
+	width: 200px;
+	margin: auto;
+}
+
+.bm2 {
+	position: absolute;
+	right: -100px;
+	top: 10px;;
 }

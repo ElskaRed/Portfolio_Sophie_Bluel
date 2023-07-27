@@ -12,7 +12,8 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="assets/scripts/scripts.js" defer></script>
+	<script src="assets/scripts/filtres.js" defer></script>
+	<script src="scripts/login.js" defer></script>
 </head>
 <body class="index__body">
 <div class="mode-edition">
@@ -35,9 +36,9 @@
 </header>
 <main>
 	<section id="introduction">
-		<figure>
+		<figure class="photo">
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<button class="bouton-modifier">
+			<button class="bouton-modifier bm1">
 				<i class="fa-regular fa-pen-to-square"></i>
 				<p>Modifier</p>
 			</button>
@@ -50,7 +51,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="title">
+			<h2>Mes Projets</h2>
+			<button class="bouton-modifier bm2">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>Modifier</p>
+			</button>
+		</div>
 		<div class="filtres"></div>
 		<div class="gallery"></div>
 	</section>
