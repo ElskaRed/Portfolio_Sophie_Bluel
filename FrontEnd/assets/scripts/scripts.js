@@ -1,3 +1,6 @@
+const filtres = document.querySelector(".filtres");
+const gallery = document.querySelector('.gallery');
+
 function afficherTravaux(data) {
   const gallery = document.querySelector(".gallery");
   gallery.innerHTML = '';
@@ -35,43 +38,58 @@ function getCategory() {
     headers: { "accept": "application/json", "Content-Type": "application/json" }
   })
     .then(response => response.json())
+    .then(categories => {
+      const btnTous = document.createElement('button');
+      btnTous.innerText = "Tous";
+      filtres.appendChild(btnTous);
+      btnTous.classList.add('filtres__boutons');
+      categories.forEach(cat => {
+        bouton = document.createElement('button');
+        bouton.dataset.id = cat.id;
+        bouton.textContent = cat.name;
+        bouton.classList.add('filtres__boutons');
+        filtres.appendChild(bouton);
+      })
+      const filtresBoutons = document.querySelectorAll('.filtres__boutons').forEach(btn => btn.addEventListener("click", monFiltre))
+      })
     .catch(error => {
       console.log("Une erreur s'est produite:", error);
-    });
+  });
+}
+
+let worksData;
+function setupData(data) {
+  worksData = data;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const filtresBoutons = document.querySelectorAll('.filtres__boutons');
-  const gallery = document.querySelector('.gallery');
-  let worksData = [];
-  let categoriesData = [];
-
-  function monFiltre(clickedButton) {
-    const buttonIndex = Array.from(filtresBoutons).indexOf(clickedButton);
-    const category = categoriesData[buttonIndex - 1];
-    const filteredData = category ? worksData.filter(item => item.category.id === category.id) : worksData;
-    afficherTravaux(filteredData);
-
-    filtresBoutons.forEach((bouton) => {
-      bouton.classList.remove('filtres__boutons--select');
-    });
-    clickedButton.classList.add('filtres__boutons--select');
-  }
-
   getWorks()
-    .then((travaux) => {
-      worksData = travaux;
+    .then(travaux => {
       afficherTravaux(travaux);
+      setupData(travaux);
     });
-
-  getCategory()
-    .then((categories) => {
-      categoriesData = categories;
-
-      filtresBoutons.forEach((bouton) => {
-        bouton.addEventListener("click", () => {
-          monFiltre(bouton);
-        });
-      });
-    });
+  getCategory();
 });
+
+function monFiltre(event) {
+  console.log(event);
+  console.log(event.currentTarget.dataset.id);
+  if(!event.currentTarget.dataset.id) return afficherTravaux(worksData);
+  const categoryId = parseInt(event.currentTarget.dataset.id);
+  const filteredData = worksData.filter(work => categoryId === work.category.id)
+  afficherTravaux(filteredData);
+}
+
+let token = localStorage.getItem("Token");
+const modeEdition = document.querySelector(".mode-edition");
+const boutonModifier = document.querySelectorAll(".bouton-modifier");
+if (token) {
+  modeEdition.style.display = "block";
+  boutonModifier.forEach(button => button.style.display = "block");
+
+  login.innerHTML = "logout"
+  login.addEventListener("click", () => {
+      localStorage.removeItem("Token")
+      window.location.href = "login.html"
+  })
+}

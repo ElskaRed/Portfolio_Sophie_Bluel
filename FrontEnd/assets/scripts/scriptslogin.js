@@ -35,6 +35,7 @@ async function loginUser() {
             
             const data = await response.json();
             let token = data.token;
+            localStorage.setItem("Token", token);
             console.log(data, token);
         
             if (data.userId === 1) {
