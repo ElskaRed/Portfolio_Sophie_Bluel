@@ -442,3 +442,31 @@ footer nav ul {
 	color: rgb(199, 38, 38);
 	margin-bottom: 30px;
 }
+
+.galerie-modal {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	column-gap: 5px;
+	row-gap: 15px;
+	margin-bottom: 10px;
+}
+
+.projet-modal {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+
+}
+
+.image-projet-modal {
+	height: 102px;
+}
+
+.editer-bouton-modal {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+	font-family: 'Work Sans';
+}
