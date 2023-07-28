@@ -9,6 +9,7 @@ const openModal = function (e) {
     modal = target;
     modal.addEventListener("click", closeModal)
     modal.querySelector(".fermer").addEventListener("click", closeModal)
+    modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation)
 }
 
 const closeModal = function (e) {
@@ -19,7 +20,12 @@ const closeModal = function (e) {
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal)
     modal.querySelector(".fermer").removeEventListener("click", closeModal)
+    modal.querySelector(".modal-wrapper").removeEventListener("click", stopPropagation)
     modal = null
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
 }
 
 document.querySelectorAll(".js-modal").forEach(a => {
