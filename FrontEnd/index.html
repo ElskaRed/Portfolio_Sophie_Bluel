@@ -43,7 +43,30 @@
 				<button class="fermer"><i class="fa-solid fa-xmark fa-lg"></i></button>
 			</div>
 			<h1 class="titre-modal">Galerie photo</h1>
-			<div class="contenu-modal"></div>
+			<div class="contenu-modal">
+				<div class="contenu-flexible-modal">
+					<div class="ajouter-photo-modal1">
+						<div class="cadre-ajout-photo">
+							<img class="picture" src="assets/icons/picture.png" alt="icone de photographie">
+							<button class="bouton-ajout-photo">+ Ajouter photo</button>
+							<p>jpg, png : 4mo max</p>
+						</div>
+					</div>
+				</div>
+				<form action="#" method="post">
+					<label for="titre">Titre</label>
+					<input type="text" name="titre" id="titre-form-modal">
+					<label for="categorie">Catégorie</label>
+					<select name="categorie" id="categories-modal">
+						<option value=""></option>
+						<option value="Objets">Objets</option>
+						<option value="Appartements">Appartements</option>
+						<option value="Hotels-et-restaurants">Hôtels et restaurants</option>
+					</select>
+				</form>
+				<div class="barre-modal"></div>
+				<input type="submit" value="Valider" class="valider1">
+			</div>
 		</div>
 	</aside>
 	<section id="introduction">
