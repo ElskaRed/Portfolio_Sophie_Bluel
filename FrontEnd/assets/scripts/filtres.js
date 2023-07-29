@@ -1,5 +1,6 @@
 const filtres = document.querySelector(".filtres");
 const gallery = document.querySelector('.gallery');
+const btnTous = document.createElement('button');
 
 function afficherTravaux(data) {
   const gallery = document.querySelector(".gallery");
@@ -39,7 +40,6 @@ function getCategory() {
   })
     .then(response => response.json())
     .then(categories => {
-      const btnTous = document.createElement('button');
       btnTous.innerText = "Tous";
       filtres.appendChild(btnTous);
       btnTous.classList.add('filtres__boutons');
@@ -50,11 +50,25 @@ function getCategory() {
         bouton.classList.add('filtres__boutons');
         filtres.appendChild(bouton);
       })
-      const filtresBoutons = document.querySelectorAll('.filtres__boutons').forEach(btn => btn.addEventListener("click", monFiltre))
+      const filtresBoutons = document.querySelectorAll('.filtres__boutons');
+      filtresBoutons.forEach(btn => btn.addEventListener("click", (event) => {
+        monFiltre(event);
+        filtresBoutons.forEach(btn => btn.classList.remove('filtres__boutons--select'));
+        btn.classList.add('filtres__boutons--select');
+      }));
       })
     .catch(error => {
       console.log("Une erreur s'est produite:", error);
   });
+}
+
+function monFiltre(event) {
+  console.log(event);
+  console.log(event.currentTarget.dataset.id);
+  if(!event.currentTarget.dataset.id) return afficherTravaux(worksData);
+  const categoryId = parseInt(event.currentTarget.dataset.id);
+  const filteredData = worksData.filter(work => categoryId === work.category.id)
+  afficherTravaux(filteredData);
 }
 
 let worksData;
@@ -71,12 +85,5 @@ document.addEventListener("DOMContentLoaded", () => {
   getCategory();
 });
 
-function monFiltre(event) {
-  console.log(event);
-  console.log(event.currentTarget.dataset.id);
-  if(!event.currentTarget.dataset.id) return afficherTravaux(worksData);
-  const categoryId = parseInt(event.currentTarget.dataset.id);
-  const filteredData = worksData.filter(work => categoryId === work.category.id)
-  afficherTravaux(filteredData);
-}
+
 

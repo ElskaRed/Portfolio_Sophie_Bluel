@@ -1,6 +1,11 @@
+// Ouverture/fermeture et focus modale //
+// Code réalisé en suivant le TP de Grafikart //
+
 let modal = null
 const focusableSelector = "button, a, input, select";
 let focusables = [];
+
+// ouverture modale //
 
 const openModal = function (e) {
     e.preventDefault()
@@ -14,6 +19,8 @@ const openModal = function (e) {
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
 };
 
+// fermeture modale //
+
 const closeModal = function (e) {
     if (modal === null) return
     e.preventDefault()
@@ -26,9 +33,11 @@ const closeModal = function (e) {
     modal = null
 };
 
-const stopPropagation = function (e) {
+const stopPropagation = function (e) { //empêche le clic sur la modale de la fermer//
     e.stopPropagation()
 };
+
+// gestion du focus enfermé dans la modale //
 
 const focusInModal = function(e) {
     e.preventDefault();
@@ -48,15 +57,17 @@ const focusInModal = function(e) {
     focusables[index].focus();
 };
 
-document.querySelectorAll(".js-modal").forEach(a => {
+//eventListeners//
+
+document.querySelectorAll(".js-modal").forEach(a => { //eventListener qui appelle l'ouverture de la modale//
     a.addEventListener("click", openModal)
 });
 
-window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" || e.key === "Esc") {
+window.addEventListener("keydown", function (e) { 
+    if (e.key === "Escape" || e.key === "Esc") { //femeture de la modale en appuyant sur échap//
         closeModal(e)
     } 
-    if (e.key ==="Tab" && modal !== null) {
+    if (e.key ==="Tab" && modal !== null) { //appel de la fonction focusInModal si appui sur tab et modale ouverte//
         focusInModal(e)
     }
 });
