@@ -12,9 +12,8 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./assets/scripts/filtres.js" type="text/javascript" defer></script>
-	<script src="./assets/scripts/login.js" type="text/javascript" defer></script>
-	<script src="./assets/scripts/modal.js" type="text/javascript" defer></script>
+	<script src="./assets/scripts/index.js" defer></script>
+	<script src="./assets/scripts/login.js" defer></script>
 </head>
 <body class="index__body">
 <div class="mode-edition">
@@ -39,33 +38,12 @@
 	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal">
 		<div class="modal-wrapper">
 			<div class="icones-modal">
-				<button class="retour"><i class="fa-solid fa-arrow-left fa-xl"></i></button>
-				<button class="fermer"><i class="fa-solid fa-xmark fa-lg"></i></button>
+				<button class="icones-top-modal retour"><i class="fa-solid fa-arrow-left fa-xl"></i></button>
+				<button class="icones-top-modal fermer"><i class="fa-solid fa-xmark fa-lg"></i></button>
 			</div>
 			<h1 class="titre-modal">Galerie photo</h1>
 			<div class="contenu-modal">
-				<div class="contenu-flexible-modal">
-					<div class="ajouter-photo-modal1">
-						<div class="cadre-ajout-photo">
-							<img class="picture" src="assets/icons/picture.png" alt="icone de photographie">
-							<button class="bouton-ajout-photo">+ Ajouter photo</button>
-							<p>jpg, png : 4mo max</p>
-						</div>
-					</div>
-				</div>
-				<form action="#" method="post">
-					<label for="titre">Titre</label>
-					<input type="text" name="titre" id="titre-form-modal">
-					<label for="categorie">Catégorie</label>
-					<select name="categorie" id="categories-modal">
-						<option value=""></option>
-						<option value="Objets">Objets</option>
-						<option value="Appartements">Appartements</option>
-						<option value="Hotels-et-restaurants">Hôtels et restaurants</option>
-					</select>
-				</form>
-				<div class="barre-modal"></div>
-				<input type="submit" value="Valider" class="valider1">
+			
 			</div>
 		</div>
 	</aside>

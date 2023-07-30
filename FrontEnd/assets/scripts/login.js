@@ -55,13 +55,13 @@ loginUser();
 let token = localStorage.getItem("Token");
 const modeEdition = document.querySelector(".mode-edition");
 const boutonModifier = document.querySelectorAll(".bouton-modifier");
-const filtres = document.querySelector(".filtres");
+const sectionFiltres = document.querySelector(".filtres");
 const login = document.querySelector(".login__lien");
 
 if (token) {
   modeEdition.style.display = "flex";
   boutonModifier.forEach(button => button.style.display = "flex");
-  filtres.style.display = "none";
+  sectionFiltres.style.display = "none";
 
   login.innerText = "logout";
   login.addEventListener("click", () => {

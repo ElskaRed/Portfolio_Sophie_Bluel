@@ -159,7 +159,7 @@ nav a:hover {
 	gap: 10px;
 }
 
-.filtres__boutons {
+.filtres__boutons, .bouton-ajouter-travail {
 	color: #1D6154;
 	border-radius: 60px;
 	border: solid 1px;
@@ -171,7 +171,7 @@ nav a:hover {
 	cursor: pointer;
 }
 
-.filtres__boutons--select {
+.filtres__boutons--select, .bouton-ajouter-travail {
 	color: white;
 	background-color: #1D6154;
 }
@@ -406,14 +406,26 @@ footer nav ul {
 }
 
 .icones-modal {
-	display: flex;
-	justify-content: space-between;
+	width: 100%;
+	height: 25px;
+	position: relative;
 }
 
-.retour, .fermer {
+.icones-top-modal {
 	border: none;
 	background: transparent;
 	cursor: pointer;
+	display: block;
+	position: absolute;
+	top: 0;
+}
+
+.retour {
+	left: 0;
+}
+
+.fermer {
+	right: 0;
 }
 
 .contenu-modal {
@@ -423,16 +435,16 @@ footer nav ul {
 }
 
 .contenu-flexible-modal {
-	width: calc(100% - 180px);
+	width: calc(100% - 150px);
 }
 
 .barre-modal {
-	width: calc(100% - 180px);
+	width: 100%;
 	background-color: #B3B3B3;
 	height: 2px;
 }
 
-.bouton-modal {
+.bouton-ajouter-travail {
 	width: 235px;
 	font-size: 1em;
 }
@@ -445,6 +457,7 @@ footer nav ul {
 	font-size: 1.1em;
 	color: rgb(199, 38, 38);
 	margin-bottom: 30px;
+	cursor: pointer;
 }
 
 .galerie-modal {
@@ -452,7 +465,7 @@ footer nav ul {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	column-gap: 5px;
 	row-gap: 15px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .projet-modal {
@@ -460,7 +473,9 @@ footer nav ul {
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 2px;
-
+}
+.projet-modal-figure {
+	position: relative;
 }
 
 .image-projet-modal {
@@ -474,6 +489,39 @@ footer nav ul {
 	cursor: pointer;
 	font-family: 'Work Sans';
 }
+
+.boutons-bas-modal {
+	width: calc(100% - 160px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 25px;
+}
+
+.icone-supprimer, .icone-deplacer {
+	position: absolute;
+	background-color: black;
+	width: 18px;
+	height: 18px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.icone1 {
+	right: 7%;
+	top: 5%;
+}
+
+.icone2 {
+	right: 37%;
+	top: 5%;
+}
+
+
 
 /******* Modal ajout photo ******/
 
