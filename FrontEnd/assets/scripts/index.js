@@ -143,9 +143,9 @@ async function afficherModalTravaux() {
     </div>
     <div class="boutons-bas-modal">
       <div class="barre-modal"></div>
-        <button class="bouton-ajouter-travail">Ajouter une photo</button>
-        <button class="supprimer-modal">Supprimer la galerie</button>
-      </div>
+      <button class="bouton-ajouter-travail">Ajouter une photo</button>
+      <button class="supprimer-modal">Supprimer la galerie</button>
+    </div>
     `;
       
       contenuModal.innerHTML = contenuModalHTML;
@@ -271,6 +271,7 @@ window.addEventListener("keydown", function (e) {
 // gestion des fonctionnalités à l'intérieure de la fenêtre modale //
 
 const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
+console.log(boutonAjouterTravail);
 boutonAjouterTravail.addEventListener("click", async () => {
   await afficherModalAjout1();
 });
