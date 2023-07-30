@@ -113,6 +113,9 @@ function generateCat() {
 const boutonRetour = document.querySelector(".retour");
 
 async function afficherModalTravaux() {
+
+  //partie de la fonction qui affiche les éléments//
+
   boutonRetour.style.display = "none";
   contenuModal.innerHTML = "";
 
@@ -152,6 +155,13 @@ async function afficherModalTravaux() {
   } catch (error) {
     console.log("Une erreur s'est produite:", error);
   }  
+
+  //partie de la fonction qui gère les fonctionnalités à l'intérieur de la modale//
+
+  const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
+  console.log(boutonAjouterTravail);
+  boutonAjouterTravail.addEventListener("click", afficherModalAjout1);
+
 }
 
 
@@ -268,10 +278,3 @@ window.addEventListener("keydown", function (e) {
     }
 });
 
-// gestion des fonctionnalités à l'intérieure de la fenêtre modale //
-
-const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
-console.log(boutonAjouterTravail);
-boutonAjouterTravail.addEventListener("click", async () => {
-  await afficherModalAjout1();
-});
