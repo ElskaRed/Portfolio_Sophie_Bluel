@@ -1,6 +1,7 @@
 const filtres = document.querySelector(".filtres");
 const gallery = document.querySelector('.gallery');
 const btnTous = document.createElement('button');
+let categories = [];
 
 function afficherTravaux(data) {
   const gallery = document.querySelector(".gallery");
@@ -94,18 +95,19 @@ const contenuModal = document.querySelector(".contenu-modal");
 
         // Déclaration de la fonction qui génère les catégories dans les options //
 
-function generateCat() {
-    return fetch("http://localhost:5678/api/categories", {
+async function generateCat() {
+    const response = await fetch("http://localhost:5678/api/categories", {
         headers: { "accept": "application/json", "Content-Type": "application/json" }
-      })
-        .then(response => response.json())
-        .then(categories => {
-            let optionsHTML = "";
-            categories.forEach((category) => {
-            optionsHTML = `<option value=${category.name}</option>`;
-        })
-        return optionsHTML;
     });
+
+    const categories = await response.json();
+    let categoriesModal = "";
+
+    categories.forEach((category) => {
+        categoriesModal += `<option value="${category.id}">${category.name}</option>`;
+    });
+
+    return categoriesModal;
 }
 
         // Déclaration affichage de la fenêtre modale d'édition/suppression des travaux //
@@ -115,6 +117,9 @@ const boutonRetour = document.querySelector(".retour");
 async function afficherModalTravaux() {
 
   //partie de la fonction qui affiche les éléments//
+
+  const titreModal = document.querySelector(".titre-modal");
+  titreModal.innerText = "Galerie photo";
 
   boutonRetour.style.display = "none";
   contenuModal.innerHTML = "";
@@ -159,15 +164,16 @@ async function afficherModalTravaux() {
   //partie de la fonction qui gère les fonctionnalités à l'intérieur de la modale//
 
   const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
-  console.log(boutonAjouterTravail);
-  boutonAjouterTravail.addEventListener("click", afficherModalAjout1);
+  boutonAjouterTravail.addEventListener("click", afficherModalAjout);
 
 }
 
 
         // Déclaration affichage de la fenêtre modale d'ajout de travaux //
 
-async function afficherModalAjout1() {
+async function afficherModalAjout() {
+  const categoriesOptions = await generateCat();
+    boutonRetour.style.display = "block";
     contenuModal.innerHTML = "";
     contenuModal.innerHTML = 
         `
@@ -187,7 +193,7 @@ async function afficherModalAjout1() {
                 <label for="categorie">Catégorie</label>
                 <select name="categorie" id="categories-modal">
                     <option value=""></option>
-                    ${generateCat()}
+                    ${categoriesOptions}
                 </select>
             </form>
             <div class="barre-modal"></div>
@@ -196,12 +202,8 @@ async function afficherModalAjout1() {
     `;
     const titreModal = document.querySelector(".titre-modal");
     titreModal.innerText = "Ajout photo";
-}
 
-        // Déclaration affichage de la fenêtre modale avec le bouton valider opérationnel //
-
-function afficherModalAjout2() {
-
+    boutonRetour.addEventListener("click", afficherModalTravaux);
 }
 
 // Ouverture/fermeture et focus modale //
