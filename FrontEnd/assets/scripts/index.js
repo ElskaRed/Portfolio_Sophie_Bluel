@@ -89,9 +89,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
+
+
+
 //Portion de code qui gère les différents contenus de la modale//
 
 const contenuModal = document.querySelector(".contenu-modal");
+const boutonRetour = document.querySelector(".retour");
 
         // Déclaration de la fonction qui génère les catégories dans les options //
 
@@ -99,20 +105,16 @@ async function generateCat() {
     const response = await fetch("http://localhost:5678/api/categories", {
         headers: { "accept": "application/json", "Content-Type": "application/json" }
     });
-
     const categories = await response.json();
     let categoriesModal = "";
-
+    
     categories.forEach((category) => {
         categoriesModal += `<option value="${category.id}">${category.name}</option>`;
     });
-
     return categoriesModal;
 }
 
         // Déclaration affichage de la fenêtre modale d'édition/suppression des travaux //
-
-const boutonRetour = document.querySelector(".retour");
 
 async function afficherModalTravaux() {
 
@@ -161,11 +163,36 @@ async function afficherModalTravaux() {
     console.log("Une erreur s'est produite:", error);
   }  
 
-  //partie de la fonction qui gère les fonctionnalités à l'intérieur de la modale//
+  // partie de la fonction qui gère les fonctionnalités à l'intérieur de la modale //
 
   const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
   boutonAjouterTravail.addEventListener("click", afficherModalAjout);
 
+  document.querySelectorAll(".icone-supprimer").forEach(bouton => bouton.addEventListener("click", supprimerTravail));
+}
+
+    //déclaration de la fonction de suppression d'un travail dans la modale //
+
+function supprimerTravail(event) {
+  event.preventDefault();
+  const workId = event.currentTarget.dataset.id;
+  let token = localStorage.getItem("Token");
+  console.log(token);
+
+    fetch(`http://localhost:5678/api/works/${workId}`, {
+      method: "DELETE",
+      headers: {
+        "accept": "application/json", 
+        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch (error => console.log("Une erreur s'est produite:", error));
+   /* if (response.ok) {
+      afficherModalTravaux();
+    }*/
 }
 
 
@@ -205,6 +232,13 @@ async function afficherModalAjout() {
 
     boutonRetour.addEventListener("click", afficherModalTravaux);
 }
+
+
+
+
+
+
+
 
 // Ouverture/fermeture et focus modale //
 // Code réalisé en suivant le TP de Grafikart //
