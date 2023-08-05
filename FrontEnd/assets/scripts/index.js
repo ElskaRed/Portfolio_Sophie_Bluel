@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//Portion de code qui gère les différents contenus de la modale//
+//Portion de code qui gère le contenu de la première fenêtre modale//
 
 const contenuModal = document.querySelector(".contenu-modal");
 const boutonRetour = document.querySelector(".retour");
@@ -180,7 +180,7 @@ async function afficherModalTravaux() {
   }));
 }
 
-    //déclaration de la fonction de suppression d'un travail dans la modale //
+        //déclaration de la fonction de suppression d'un travail dans la modale //
 
 function supprimerTravail(event) {
   event.preventDefault();
@@ -207,7 +207,20 @@ function supprimerTravail(event) {
     .catch(error => console.log("Une erreur s'est produite:", error));
 }
 
-        // Déclaration affichage de la fenêtre modale d'ajout de travaux //
+
+
+
+
+
+
+
+
+
+
+
+//Portion de code qui gère l'ajout d'un travail dans le formulaire modal//
+
+      // Déclaration affichage de la fenêtre modale d'ajout de travaux //
 
 async function afficherModalAjout() {
   const categoriesOptions = await generateCat();
@@ -220,8 +233,10 @@ async function afficherModalAjout() {
                 <div class="ajouter-photo-modal1">
                     <div class="cadre-ajout-photo">
                         <img class="picture" src="assets/icons/picture.png" alt="icone de photographie">
-                        <button class="bouton-ajout-photo">+ Ajouter photo</button>
+                        <label for="photo" class="bouton-ajout-photo">+ Ajouter photo</label>
+                        <input type="file" id="photo" class="photoinput" name="photo">
                         <p>jpg, png : 4mo max</p>
+                        <img src="" class="photo-choisie">
                     </div>
                 </div>
             </div>
