@@ -1,10 +1,9 @@
 const filtres = document.querySelector(".filtres");
 const gallery = document.querySelector('.gallery');
 const btnTous = document.createElement('button');
-let categories = [];
+let worksData;
 
 function afficherTravaux(data) {
-  const gallery = document.querySelector(".gallery");
   gallery.innerHTML = '';
   
   data.forEach((item) => {
@@ -73,7 +72,6 @@ function monFiltre(event) {
   afficherTravaux(filteredData);
 }
 
-let worksData;
 function setupData(data) {
   worksData = data;
 }
@@ -86,6 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   getCategory();
 });
+
+
+
+
 
 
 
@@ -187,14 +189,16 @@ function supprimerTravail(event) {
         "Authorization": `Bearer ${token}`
       }
     })
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch (error => console.log("Une erreur s'est produite:", error));
-   /* if (response.ok) {
-      afficherModalTravaux();
-    }*/
+    .then(response => {
+      if (response.ok) {
+        console.log("Travail supprimé avec succès");
+        afficherModalTravaux();
+      } else {
+        console.log("Erreur lors de la suppression du travail");
+      }
+    })
+    .catch(error => console.log("Une erreur s'est produite:", error));
 }
-
 
         // Déclaration affichage de la fenêtre modale d'ajout de travaux //
 
@@ -240,6 +244,10 @@ async function afficherModalAjout() {
 
 
 
+
+
+
+
 // Ouverture/fermeture et focus modale //
 // Code réalisé en suivant le TP de Grafikart //
 
@@ -251,7 +259,7 @@ let focusables = [];
 
 const openModal = function (e) {
     e.preventDefault()
-    modal = document.querySelector(e.currentTarget.getAttribute("href"));
+    modal = document.getElementById("modal1");
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
     modal.style.display = "flex";
     modal.removeAttribute("aria-hidden");
