@@ -602,3 +602,7 @@ select {
 	max-height: 170px;
 	max-width: 100%;
 }
+
+.photo-choisie-background {
+	display: none;
+}

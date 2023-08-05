@@ -233,9 +233,9 @@ async function afficherModalAjout() {
                 <div class="ajouter-photo-modal1">
                     <div class="cadre-ajout-photo">
                         <img class="picture" src="assets/icons/picture.png" alt="icone de photographie">
-                        <label for="photo" class="bouton-ajout-photo">+ Ajouter photo</label>
-                        <input type="file" id="photo" class="photoinput" name="photo">
-                        <p>jpg, png : 4mo max</p>
+                        <label for="photo" class="bouton-ajout-photo background">+ Ajouter photo</label>
+                        <input type="file" id="photo" class="photoinput background" name="photo">
+                        <p class="background">jpg, png : 4mo max</p>
                         <img src="" class="photo-choisie">
                     </div>
                 </div>
@@ -257,7 +257,29 @@ async function afficherModalAjout() {
     titreModal.innerText = "Ajout photo";
 
     boutonRetour.addEventListener("click", afficherModalTravaux);
+
+    const input = document.getElementById("photo");
+    input.addEventListener("change", afficherImage);
 }
+
+
+//fonction chargée d'affichée l'image sélectionnée dans l'input//
+
+function afficherImage(event) {
+  const file = event.target.files[0];
+  const photoChoisie = document.querySelector(".photo-choisie");
+  if (file) {
+    const reader = new FileReader();
+    const backgroundElements = document.querySelectorAll(".background");
+    reader.addEventListener("load", function () {
+      photoChoisie.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+    backgroundElements.forEach(background => background.classList.add("photo-choisie-background"));
+  }
+}
+  
+    
 
 
 
@@ -331,9 +353,9 @@ const focusInModal = function(e) {
 
             //eventListeners//
 
-document.querySelectorAll(".js-modal").forEach(a => { //eventListener qui appelle l'ouverture de la modale//
-    a.addEventListener("click", openModal)
-});
+
+//eventListener qui appelle l'ouverture de la modale//
+document.querySelector(".js-modal").addEventListener("click", openModal);
 
 window.addEventListener("keydown", function (e) { 
     if (e.key === "Escape" || e.key === "Esc") { //femeture de la modale en appuyant sur échap//
@@ -343,4 +365,19 @@ window.addEventListener("keydown", function (e) {
         focusInModal(e)
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
