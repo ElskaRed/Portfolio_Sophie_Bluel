@@ -170,7 +170,14 @@ async function afficherModalTravaux() {
   const boutonAjouterTravail = document.querySelector(".bouton-ajouter-travail");
   boutonAjouterTravail.addEventListener("click", afficherModalAjout);
 
-  document.querySelectorAll(".icone-supprimer").forEach(bouton => bouton.addEventListener("click", supprimerTravail));
+  document.querySelectorAll(".icone-supprimer").forEach(bouton => bouton.addEventListener("click", (event) => {
+    supprimerTravail(event);
+    getWorks()
+    .then(travaux => {
+      afficherTravaux(travaux);
+      setupData(travaux);
+    });
+  }));
 }
 
     //déclaration de la fonction de suppression d'un travail dans la modale //
