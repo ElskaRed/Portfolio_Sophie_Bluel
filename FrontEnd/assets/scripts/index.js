@@ -264,13 +264,15 @@ async function afficherModalAjout() {
     const fileInput = document.getElementById("photo");
     const titreInput = document.getElementById("titre-form-modal");
     const categorieSelect = document.getElementById("categories-modal");
+    const boutonValider = document.querySelector(".valider1");
 
     fileInput.addEventListener("change", (event) => {
     afficherImage(event);
     affichageBoutonValider();
     });
     titreInput.addEventListener("input", affichageBoutonValider);
-    categorieSelect.addEventListener("change", affichageBoutonValider);
+    categorieSelect.addEventListener("change", affichageBoutonValider);    
+    boutonValider.addEventListener("click", ajouterTravail);
 }
     
 
@@ -293,11 +295,11 @@ function afficherImage(event) {
 }
 
 function affichageBoutonValider() {
-  console.log("fonction appelée")
   const fileInput = document.getElementById("photo");
   const BoutonValider = document.querySelector(".valider1");
   const titreInput = document.getElementById("titre-form-modal");
   const categorieSelect = document.getElementById("categories-modal");
+
   if (fileInput.files.length > 0 && titreInput.value.trim() !== "" && categorieSelect.value !=="") {
     BoutonValider.classList.add("valider2");
   } else {
@@ -305,7 +307,38 @@ function affichageBoutonValider() {
   }
 }
 
+function ajouterTravail(event) {
+  const fileInput = document.getElementById("photo");
+  const titreInput = document.getElementById("titre-form-modal");
+  const categorieSelect = document.getElementById("categories-modal");
 
+  if (fileInput.files.length === 0 || titreInput.value.trim() === "" || categorieSelect.value === "") {
+    alert("Veuillez ajouter une photo et remplir tous les champs du formulaire pour valider.");
+    return;
+  }
+
+  let formData = new FormData();
+  formData.append("image", fileInput.files[0]);
+  formData.append("title", titreInput.value);
+  formData.append("category", categorieSelect.value);
+
+  let request = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  };
+
+  fetch("http://localhost:5678/api/works", request)
+  .then((response) => {
+    if (response.ok) {
+      alert("Le travail a bien été ajouté à la galerie.");
+    } else {
+      alert("Une erreur s'est produite lors de l'ajout du nouveau travail.");
+    }
+  });
+}
 
 
 
