@@ -3,6 +3,10 @@ const gallery = document.querySelector('.gallery');
 const btnTous = document.createElement('button');
 let worksData;
 
+const contenuModal = document.querySelector(".contenu-modal");
+const boutonRetour = document.querySelector(".retour");
+
+
 function afficherTravaux(data) {
   gallery.innerHTML = '';
   
@@ -97,9 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 //Portion de code qui gère le contenu de la première fenêtre modale//
-
-const contenuModal = document.querySelector(".contenu-modal");
-const boutonRetour = document.querySelector(".retour");
 
         // Déclaration de la fonction qui génère les catégories dans les options //
 
@@ -222,6 +223,8 @@ function supprimerTravail(event) {
 
       // Déclaration affichage de la fenêtre modale d'ajout de travaux //
 
+
+
 async function afficherModalAjout() {
   const categoriesOptions = await generateCat();
     boutonRetour.style.display = "block";
@@ -254,14 +257,22 @@ async function afficherModalAjout() {
         </div>
     `;
     const titreModal = document.querySelector(".titre-modal");
-    titreModal.innerText = "Ajout photo";
+    titreModal.innerText = "Ajout photo"; //change le titre de la modale
 
-    boutonRetour.addEventListener("click", afficherModalTravaux);
+    boutonRetour.addEventListener("click", afficherModalTravaux); //retour à la modale initiale
 
-    const input = document.getElementById("photo");
-    input.addEventListener("change", afficherImage);
+    const fileInput = document.getElementById("photo");
+    const titreInput = document.getElementById("titre-form-modal");
+    const categorieSelect = document.getElementById("categories-modal");
+
+    fileInput.addEventListener("change", (event) => {
+    afficherImage(event);
+    affichageBoutonValider();
+    });
+    titreInput.addEventListener("input", affichageBoutonValider);
+    categorieSelect.addEventListener("change", affichageBoutonValider);
 }
-
+    
 
 //fonction chargée d'affichée l'image sélectionnée dans l'input//
 
@@ -271,15 +282,28 @@ function afficherImage(event) {
   if (file) {
     const reader = new FileReader();
     const backgroundElements = document.querySelectorAll(".background");
+
     reader.addEventListener("load", function () {
       photoChoisie.src = reader.result;
     });
+
     reader.readAsDataURL(file);
     backgroundElements.forEach(background => background.classList.add("photo-choisie-background"));
   }
 }
-  
-    
+
+function affichageBoutonValider() {
+  console.log("fonction appelée")
+  const fileInput = document.getElementById("photo");
+  const BoutonValider = document.querySelector(".valider1");
+  const titreInput = document.getElementById("titre-form-modal");
+  const categorieSelect = document.getElementById("categories-modal");
+  if (fileInput.files.length > 0 && titreInput.value.trim() !== "" && categorieSelect.value !=="") {
+    BoutonValider.classList.add("valider2");
+  } else {
+    BoutonValider.classList.remove("valider2");
+  }
+}
 
 
 
@@ -365,19 +389,5 @@ window.addEventListener("keydown", function (e) {
         focusInModal(e)
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
