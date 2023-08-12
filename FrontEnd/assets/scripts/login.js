@@ -1,3 +1,6 @@
+        // Page de code qui correspond au processus de login //
+
+//Fonction de login contenant les conditions de validation du formulaire//        
 async function loginUser() {
     const form = document.querySelector("form");
     form.addEventListener("submit", async (event) => {
@@ -22,7 +25,7 @@ async function loginUser() {
             email: email,
             password: password
         };
-        
+        // requête fetch méthode POST //
         try {
             const response = await fetch("http://localhost:5678/api/users/login", {
                 method: "POST",
@@ -57,6 +60,8 @@ const modeEdition = document.querySelector(".mode-edition");
 const boutonModifier = document.querySelectorAll(".bouton-modifier");
 const sectionFiltres = document.querySelector(".filtres");
 const login = document.querySelector(".login__lien");
+
+//redirection de l'utilisateur et admin logout//
 
 if (token) {
   modeEdition.style.display = "flex";

@@ -6,6 +6,7 @@ let worksData;
 const contenuModal = document.querySelector(".contenu-modal");
 const boutonRetour = document.querySelector(".retour");
 
+//fonction qui affiche les travaux dans la galerie de la page d'accueil//
 
 function afficherTravaux(data) {
   gallery.innerHTML = '';
@@ -28,6 +29,8 @@ function afficherTravaux(data) {
   });
 }
 
+//fonction d'appel à l'API pour works//
+
 function getWorks() {
   return fetch("http://localhost:5678/api/works", {
     headers: { "accept": "application/json", "Content-Type": "application/json" }
@@ -38,6 +41,7 @@ function getWorks() {
     });
 }
 
+//fonction d'appel à l'API pour récupérer les catégories et créer les filtres//
 
 function getCategory() {
   return fetch("http://localhost:5678/api/categories", {
@@ -67,6 +71,7 @@ function getCategory() {
   });
 }
 
+//fonction qui trie les données récupérées par getWorks et qui les affiche en fonction du filtre//
 function monFiltre(event) {
   console.log(event);
   console.log(event.currentTarget.dataset.id);
@@ -80,6 +85,7 @@ function setupData(data) {
   worksData = data;
 }
 
+//appel des fonctions au chargement de la page//
 document.addEventListener("DOMContentLoaded", () => {
   getWorks()
     .then(travaux => {
@@ -223,8 +229,6 @@ function supprimerTravail(event) {
 
       // Déclaration affichage de la fenêtre modale d'ajout de travaux //
 
-
-
 async function afficherModalAjout() {
   const categoriesOptions = await generateCat();
     boutonRetour.style.display = "block";
@@ -276,7 +280,7 @@ async function afficherModalAjout() {
 }
     
 
-//fonction chargée d'affichée l'image sélectionnée dans l'input//
+//fonction chargée d'afficher l'image sélectionnée dans l'input//
 
 function afficherImage(event) {
   const file = event.target.files[0];
@@ -294,6 +298,8 @@ function afficherImage(event) {
   }
 }
 
+//fonction qui change visuellement le bouton valider lorsque les conditions sont remplies//
+
 function affichageBoutonValider() {
   const fileInput = document.getElementById("photo");
   const BoutonValider = document.querySelector(".valider1");
@@ -306,6 +312,8 @@ function affichageBoutonValider() {
     BoutonValider.classList.remove("valider2");
   }
 }
+
+// Fonction qui renvoie les données du formulaire à l'API en ligne pour ajouter un travail //
 
 function ajouterTravail(event) {
   const fileInput = document.getElementById("photo");
